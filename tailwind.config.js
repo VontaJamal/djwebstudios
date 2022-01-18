@@ -1,9 +1,12 @@
+// @ts-check
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const defaultTheme = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
+/** @type {import("tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.js', './components/**/*.js', './layouts/**/*.js', './lib/**/*.js'],
+  content: ['./pages/**/*.tsx', './components/**/*.tsx', './layouts/**/*.tsx', './lib/**/*.ts'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -21,15 +24,8 @@ module.exports = {
       },
       colors: {
         primary: colors.teal,
-        gray: colors.trueGray,
-        code: {
-          green: '#b5f4a5',
-          yellow: '#ffe484',
-          purple: '#d9a9ff',
-          red: '#ff8383',
-          blue: '#93ddfd',
-          white: '#fff',
-        },
+        //@ts-ignore
+        gray: colors.neutral, // TODO: Remove ts-ignore after tw types gets updated to v3
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -58,6 +54,9 @@ module.exports = {
             },
             'h4,h5,h6': {
               color: theme('colors.gray.900'),
+            },
+            pre: {
+              backgroundColor: theme('colors.gray.800'),
             },
             code: {
               color: theme('colors.pink.500'),
@@ -124,6 +123,9 @@ module.exports = {
             'h4,h5,h6': {
               color: theme('colors.gray.100'),
             },
+            pre: {
+              backgroundColor: theme('colors.gray.800'),
+            },
             code: {
               backgroundColor: theme('colors.gray.800'),
             },
@@ -155,9 +157,6 @@ module.exports = {
         },
       }),
     },
-  },
-  variants: {
-    typography: ['dark'],
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }
